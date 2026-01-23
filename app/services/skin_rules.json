@@ -1,0 +1,255 @@
+{
+  "akiec": {
+    "name": "Actinic Keratoses and Intraepithelial Carcinoma",
+    "description": "Actinic keratoses (AK) are precancerous skin lesions caused by long-term sun exposure. They appear as rough, scaly patches on sun-exposed areas. Intraepithelial carcinoma represents early-stage skin cancer that hasn't penetrated deeper layers.",
+    "severity": "Moderate",
+    "risk_factors": [
+      "Prolonged sun exposure",
+      "Fair skin",
+      "Age over 40",
+      "Weakened immune system",
+      "History of sunburns"
+    ],
+    "symptoms": [
+      "Rough, dry, or scaly patch of skin",
+      "Flat to slightly raised patch",
+      "Color variations (pink, red, or brown)",
+      "Itching or burning sensation",
+      "Size typically less than 1 inch"
+    ],
+    "recommendations": [
+      "Consult a dermatologist for evaluation and treatment options",
+      "Treatment may include cryotherapy, topical medications, or photodynamic therapy",
+      "Use broad-spectrum sunscreen (SPF 30+) daily",
+      "Wear protective clothing and avoid peak sun hours",
+      "Regular skin checks by a dermatologist"
+    ],
+    "emergency_care": "Seek immediate care if the lesion grows rapidly, bleeds persistently, or becomes painful.",
+    "prognosis": "Good with treatment. AK has a small chance of progressing to squamous cell carcinoma if left untreated.",
+    "treatment_options": [
+      "Cryotherapy (freezing)",
+      "Topical chemotherapy creams",
+      "Photodynamic therapy",
+      "Laser resurfacing",
+      "Chemical peels"
+    ]
+  },
+  "bcc": {
+    "name": "Basal Cell Carcinoma",
+    "description": "Basal cell carcinoma (BCC) is the most common type of skin cancer, originating from basal cells in the skin's outer layer. It rarely spreads but can cause significant local damage if untreated.",
+    "severity": "Moderate",
+    "risk_factors": [
+      "Cumulative sun exposure",
+      "Fair skin, light hair, and light eyes",
+      "Age (most common over 50)",
+      "Previous radiation therapy",
+      "Family history of skin cancer"
+    ],
+    "symptoms": [
+      "Pearly or waxy bump",
+      "Flat, flesh-colored or brown lesion",
+      "Bleeding or scabbing sore that heals and returns",
+      "Pink growth with raised edges",
+      "White, waxy, scar-like lesion"
+    ],
+    "recommendations": [
+      "Schedule an appointment with a dermatologist promptly",
+      "Surgical removal is typically recommended",
+      "Regular follow-up examinations are important",
+      "Sun protection is essential to prevent new lesions",
+      "Avoid tanning beds and excessive sun exposure"
+    ],
+    "emergency_care": "While BCC grows slowly, seek medical attention if you notice rapid changes, excessive bleeding, or signs of infection.",
+    "prognosis": "Excellent when detected and treated early. Cure rate exceeds 95% with appropriate treatment.",
+    "treatment_options": [
+      "Surgical excision",
+      "Mohs surgery (for high-risk areas)",
+      "Curettage and electrodesiccation",
+      "Radiation therapy",
+      "Topical medications (for superficial BCC)"
+    ]
+  },
+  "bkl": {
+    "name": "Benign Keratosis-like Lesions",
+    "description": "Benign keratosis-like lesions include seborrheic keratoses and solar lentigo. These are non-cancerous skin growths that are extremely common, especially with aging. They are harmless but may be cosmetically concerning.",
+    "severity": "Mild",
+    "risk_factors": [
+      "Age (more common in people over 40)",
+      "Genetics (runs in families)",
+      "Sun exposure (for solar lentigo)",
+      "Fair skin"
+    ],
+    "symptoms": [
+      "Brown, black, or tan growths",
+      "Waxy, slightly raised appearance",
+      "Looks like it's pasted on the skin",
+      "May be itchy occasionally",
+      "Rough or velvety texture"
+    ],
+    "recommendations": [
+      "No treatment necessary unless cosmetically bothersome",
+      "Monitor for any changes in appearance",
+      "Regular skin self-examinations",
+      "Annual dermatology check-ups",
+      "Can be removed for cosmetic reasons"
+    ],
+    "emergency_care": "Seek evaluation if a lesion changes rapidly in size, color, or begins to bleed, as it could indicate a different condition.",
+    "prognosis": "Benign with no risk of becoming cancerous. These lesions are harmless and only require treatment if desired for cosmetic reasons.",
+    "treatment_options": [
+      "Cryotherapy",
+      "Curettage",
+      "Electrocautery",
+      "Laser therapy",
+      "No treatment (safe to leave alone)"
+    ]
+  },
+  "df": {
+    "name": "Dermatofibroma",
+    "description": "Dermatofibroma is a common benign skin growth composed of fibrous tissue. It typically appears as a small, firm nodule on the legs. The cause is unknown, but may follow minor trauma or insect bites.",
+    "severity": "Mild",
+    "risk_factors": [
+      "More common in women",
+      "Typically appears in young to middle-aged adults",
+      "May follow minor skin trauma",
+      "Insect bites"
+    ],
+    "symptoms": [
+      "Small, firm bump under the skin",
+      "Red, brown, or purple color",
+      "Typically 1 cm or smaller",
+      "Dimples when pinched",
+      "May be slightly itchy or tender",
+      "Usually on lower legs"
+    ],
+    "recommendations": [
+      "No treatment required unless symptomatic",
+      "Routine monitoring is sufficient",
+      "Can be surgically removed if bothersome",
+      "Keep the area clean and moisturized",
+      "Avoid picking or scratching"
+    ],
+    "emergency_care": "Generally no emergency care needed. Consult a doctor if the lesion grows rapidly, becomes very painful, or changes significantly.",
+    "prognosis": "Excellent. Dermatofibromas are benign and rarely cause complications. They may remain indefinitely or slowly fade over years.",
+    "treatment_options": [
+      "Observation (no treatment needed)",
+      "Surgical excision",
+      "Cryotherapy (may cause pigment changes)",
+      "Laser therapy",
+      "Steroid injection (to reduce size)"
+    ]
+  },
+  "mel": {
+    "name": "Melanoma",
+    "description": "Melanoma is the most serious type of skin cancer, developing from melanocytes (pigment-producing cells). It can spread rapidly to other parts of the body if not detected early. Early detection and treatment are critical.",
+    "severity": "Severe",
+    "risk_factors": [
+      "UV radiation exposure",
+      "History of sunburns, especially in childhood",
+      "Fair skin, light hair, light eyes",
+      "Many moles or atypical moles",
+      "Family history of melanoma",
+      "Weakened immune system",
+      "Age (risk increases with age)"
+    ],
+    "symptoms": [
+      "Asymmetric mole or lesion",
+      "Border irregularity",
+      "Color variation (multiple colors)",
+      "Diameter larger than 6mm",
+      "Evolving (changing in size, shape, or color)",
+      "New mole appearing after age 30",
+      "Itching, bleeding, or crusting"
+    ],
+    "recommendations": [
+      "URGENT: Consult a dermatologist immediately for evaluation",
+      "Biopsy and staging will determine treatment",
+      "May require surgical excision with wide margins",
+      "Lymph node evaluation may be necessary",
+      "Regular full-body skin examinations",
+      "Genetic counseling if family history present"
+    ],
+    "emergency_care": "Seek immediate medical attention. Early diagnosis dramatically improves survival rates. Do not delay consultation with a dermatologist or oncologist.",
+    "prognosis": "Highly dependent on stage at diagnosis. Early-stage melanoma has excellent cure rates (>95%). Advanced melanoma requires aggressive treatment and has poorer outcomes.",
+    "treatment_options": [
+      "Surgical excision with margins",
+      "Sentinel lymph node biopsy",
+      "Immunotherapy",
+      "Targeted therapy",
+      "Radiation therapy",
+      "Chemotherapy (for advanced cases)"
+    ]
+  },
+  "nv": {
+    "name": "Melanocytic Nevi (Moles)",
+    "description": "Melanocytic nevi, commonly known as moles, are benign growths of melanocytes. Most people have 10-40 moles. While generally harmless, they should be monitored for changes that might indicate melanoma.",
+    "severity": "Mild",
+    "risk_factors": [
+      "Genetics (hereditary)",
+      "Sun exposure (may increase number)",
+      "Fair skin",
+      "Immune suppression"
+    ],
+    "symptoms": [
+      "Round or oval shape",
+      "Even color (brown, tan, black, or pink)",
+      "Flat or slightly raised",
+      "Clear, regular borders",
+      "Typically smaller than 6mm",
+      "Uniform appearance"
+    ],
+    "recommendations": [
+      "Routine monitoring for changes (ABCDE rule)",
+      "Annual skin examination by dermatologist",
+      "Monthly self-skin examinations",
+      "Sun protection to prevent new moles",
+      "Photograph suspicious moles to track changes",
+      "Consider removal if atypical features present"
+    ],
+    "emergency_care": "Seek evaluation if a mole shows signs of melanoma (asymmetry, irregular borders, color changes, diameter >6mm, or evolution/changes).",
+    "prognosis": "Excellent. Most moles remain benign throughout life. Regular monitoring ensures early detection if changes occur.",
+    "treatment_options": [
+      "Observation (most common)",
+      "Surgical excision (if atypical or cosmetic concerns)",
+      "Shave removal",
+      "Punch biopsy (for evaluation)"
+    ]
+  },
+  "vasc": {
+    "name": "Vascular Lesions",
+    "description": "Vascular lesions are abnormalities of blood vessels in the skin. They include hemangiomas, angiomas, and telangiectasias. Most are benign and cosmetic, though some may require treatment.",
+    "severity": "Mild",
+    "risk_factors": [
+      "Genetics (some types are hereditary)",
+      "Age (cherry angiomas more common with aging)",
+      "Pregnancy (may cause appearance)",
+      "Liver disease (spider angiomas)",
+      "Sun exposure"
+    ],
+    "symptoms": [
+      "Red or purple discoloration",
+      "Raised or flat appearance",
+      "May blanch with pressure",
+      "Cherry red papules (cherry angiomas)",
+      "Spider-like appearance (spider angiomas)",
+      "Usually painless"
+    ],
+    "recommendations": [
+      "Medical evaluation to determine specific type",
+      "Most require no treatment",
+      "Treatment available for cosmetic concerns",
+      "Monitor for changes or bleeding",
+      "Protect from trauma",
+      "Sun protection recommended"
+    ],
+    "emergency_care": "Seek medical care if a vascular lesion bleeds persistently, grows rapidly, or causes pain. Most vascular lesions are not urgent.",
+    "prognosis": "Excellent. Most vascular lesions are benign and stable. Some may fade over time, especially in children.",
+    "treatment_options": [
+      "Observation (no treatment needed)",
+      "Laser therapy",
+      "Electrocautery",
+      "Cryotherapy",
+      "Sclerotherapy",
+      "Surgical excision (rarely needed)"
+    ]
+  }
+}
