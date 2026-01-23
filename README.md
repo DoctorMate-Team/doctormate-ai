@@ -245,6 +245,43 @@ Use the interactive documentation at http://localhost:8000/docs to test endpoint
 
 ⚠️ **IMPORTANT**: This application is for educational and informational purposes only. It is NOT a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.
 
+## Deployment
+
+### Deploy to Railway
+
+1. **Fork/Clone the repository**
+
+2. **Connect to Railway**
+   - Go to [Railway](https://railway.app/)
+   - Create a new project
+   - Connect your GitHub repository
+
+3. **Configure Environment Variables**
+   
+   Add the following environment variable in Railway dashboard:
+   ```
+   OPENAI_API_KEY=your_openai_api_key_here
+   ```
+
+4. **Deployment Settings** (Automatically configured via `railway.json`):
+   - **Start Command**: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+   - **Healthcheck Path**: `/`
+   - **Restart Policy**: On Failure
+   - **Max Retries**: 10
+
+5. **Deploy**
+   - Push to `main` branch to trigger automatic deployment
+   - Railway will automatically detect the Python app and install dependencies
+   - Access your deployed API at the Railway-provided URL
+
+### Environment Variables Required
+
+```
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
+**Note**: Never commit your `.env` file to version control. The `.gitignore` file is configured to exclude it.
+
 ## License
 
 [Add your license here]
