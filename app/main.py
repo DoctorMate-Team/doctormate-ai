@@ -1,8 +1,9 @@
 """
 Main application file with API routes.
 """
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI, UploadFile, File, HTTPException, Header
 from dotenv import load_dotenv
+from typing import Optional
 
 from app.models import (
     ApiResponse,
@@ -34,12 +35,16 @@ async def root():
 
 
 @app.post("/ai/skin/check", response_model=ApiResponse[SkinLesionResponseData])
-async def skin_check(file: UploadFile = File(...)):
+async def skin_check(
+    file: UploadFile = File(...),
+    authorization: Optional[str] = Header(None)
+):
     """
     Analyze uploaded skin lesion image.
     
     Args:
         file: Uploaded image file
+        authorization: Optional Bearer token for DoctorMate API (to fetch specialty/doctors)
         
     Returns:
         ApiResponse with skin lesion analysis results
@@ -48,9 +53,14 @@ async def skin_check(file: UploadFile = File(...)):
         # Preprocess image
         image_array = await preprocess_image(file)
         
-        # Get prediction from service
+        # Extract token from Authorization header
+        token = None
+        if authorization and authorization.startswith("Bearer "):
+            token = authorization.replace("Bearer ", "")
+        
+        # Get prediction from service (now async)
         skin_service = get_skin_service()
-        prediction = skin_service.predict(image_array)
+        prediction = await skin_service.predict(image_array, token)
         
         return ApiResponse(
             code=200,
@@ -62,20 +72,29 @@ async def skin_check(file: UploadFile = File(...)):
 
 
 @app.post("/ai/symptoms/check", response_model=ApiResponse[SymptomsResponseData])
-async def symptoms_check(request: SymptomsRequest):
+async def symptoms_check(
+    request: SymptomsRequest,
+    authorization: Optional[str] = Header(None)
+):
     """
     Analyze user symptoms using AI.
     
     Args:
         request: SymptomsRequest with symptom description
+        authorization: Optional Bearer token for DoctorMate API (to fetch specialty/doctors)
         
     Returns:
         ApiResponse with symptom analysis results
     """
     try:
+        # Extract token from Authorization header
+        token = None
+        if authorization and authorization.startswith("Bearer "):
+            token = authorization.replace("Bearer ", "")
+        
         # Get analysis from service
         symptoms_service = get_symptoms_service()
-        analysis = await symptoms_service.analyze_symptoms(request.symptoms)
+        analysis = await symptoms_service.analyze_symptoms(request.symptoms, token)
         
         return ApiResponse(
             code=200,

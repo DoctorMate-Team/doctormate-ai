@@ -5,6 +5,10 @@ import os
 import json
 from openai import AsyncOpenAI
 from typing import Dict
+from app.services.doctormate_api_service import (
+    get_doctormate_api_service,
+    SpecialtyMapper
+)
 
 
 class SymptomsAnalysisService:
@@ -33,12 +37,13 @@ Base your analysis on common medical knowledge. Be cautious and recommend profes
         if not self.api_key:
             raise ValueError("OPENAI_API_KEY environment variable is not set.")
     
-    async def analyze_symptoms(self, symptoms: str) -> Dict:
+    async def analyze_symptoms(self, symptoms: str, token: str = None) -> Dict:
         """
         Analyze symptoms using OpenAI API.
         
         Args:
             symptoms: User's symptom description
+            token: Optional DoctorMate API bearer token for fetching specialty/doctors
             
         Returns:
             dict: Structured medical assessment
@@ -60,6 +65,26 @@ Base your analysis on common medical knowledge. Be cautious and recommend profes
             )
             
             result = json.loads(response.choices[0].message.content)
+            
+            # Get specialty and doctors from DoctorMate API if token provided
+            specialty = {}
+            recommended_doctors = []
+            
+            if token:
+                diagnosis = result.get("possible_diagnosis", "")
+                specialty_id = SpecialtyMapper.get_specialty_for_symptoms(symptoms, diagnosis)
+                
+                try:
+                    api_service = get_doctormate_api_service(token)
+                    specialty = await api_service.get_specialty(specialty_id) or {}
+                    recommended_doctors = await api_service.get_recommended_doctors(specialty_id, limit=3)
+                except Exception as e:
+                    print(f"Error fetching specialty/doctors: {str(e)}")
+            
+            # Add specialty and doctors to result
+            result["specialty"] = specialty
+            result["recommended_doctors"] = recommended_doctors
+            
             return result
             
         except Exception as e:

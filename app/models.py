@@ -33,6 +33,8 @@ class SymptomsResponseData(BaseModel):
     description: str
     recommendations: List[str]
     emergency_care: str
+    specialty: Dict = Field(default_factory=dict, description="Recommended medical specialty")
+    recommended_doctors: List[Dict] = Field(default_factory=list, description="List of recommended doctors")
     disclaimer: str
 
 
@@ -44,8 +46,11 @@ class SkinLesionResponseData(BaseModel):
     description: str
     recommendations: List[str]
     emergency_care: str
+    specialty: Dict = Field(default_factory=dict, description="Recommended medical specialty")
+    recommended_doctors: List[Dict] = Field(default_factory=list, description="List of recommended doctors")
     additional_info: Dict = Field(
         default_factory=dict,
         description="Additional medical information (diagnosis_code, risk_factors, symptoms, prognosis, treatment_options, probabilities)"
     )
+    disclaimer: str
     disclaimer: str

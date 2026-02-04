@@ -6,6 +6,10 @@ import numpy as np
 import json
 from pathlib import Path
 from typing import Dict
+from app.services.doctormate_api_service import (
+    get_doctormate_api_service,
+    SpecialtyMapper
+)
 
 
 class SkinAnalysisService:
@@ -24,12 +28,13 @@ class SkinAnalysisService:
         with open(knowledge_base_path, 'r', encoding='utf-8') as f:
             self.knowledge_base = json.load(f)
         
-    def predict(self, image_array: np.ndarray) -> dict:
+    async def predict(self, image_array: np.ndarray, token: str = None) -> dict:
         """
         Predict skin lesion type from preprocessed image array.
         
         Args:
             image_array: Preprocessed image array in NHWC format
+            token: Optional DoctorMate API bearer token for fetching specialty/doctors
             
         Returns:
             dict: Prediction results with diagnosis, confidence, severity, etc.
@@ -40,9 +45,9 @@ class SkinAnalysisService:
         predictions = outputs[0]
         
         # Format response
-        return self._format_prediction(predictions)
+        return await self._format_prediction(predictions, token)
     
-    def _format_prediction(self, predictions: np.ndarray) -> dict:
+    async def _format_prediction(self, predictions: np.ndarray, token: str = None) -> dict:
         """Format raw model predictions into structured response with knowledge base."""
         probs = predictions[0]
         idx = int(np.argmax(probs))
@@ -53,6 +58,19 @@ class SkinAnalysisService:
         # Get detailed information from knowledge base
         lesion_info = self.knowledge_base.get(diagnosis, {})
         
+        # Get specialty and doctors from DoctorMate API if token provided
+        specialty_id = SpecialtyMapper.get_specialty_for_skin_lesion(diagnosis)
+        specialty = {}
+        recommended_doctors = []
+        
+        if token:
+            try:
+                api_service = get_doctormate_api_service(token)
+                specialty = await api_service.get_specialty(specialty_id) or {}
+                recommended_doctors = await api_service.get_recommended_doctors(specialty_id, limit=3)
+            except Exception as e:
+                print(f"Error fetching specialty/doctors: {str(e)}")
+        
         return {
             "possible_diagnosis": lesion_info.get("name", "Unknown"),
             "confidence": int(round(confidence * 100)),  # Convert to percentage
@@ -60,6 +78,8 @@ class SkinAnalysisService:
             "description": lesion_info.get("description", "No description available."),
             "recommendations": lesion_info.get("recommendations", []),
             "emergency_care": lesion_info.get("emergency_care", "Consult a healthcare provider if concerned."),
+            "specialty": specialty,
+            "recommended_doctors": recommended_doctors,
             "additional_info": {
                 "diagnosis_code": diagnosis,
                 "risk_factors": lesion_info.get("risk_factors", []),
