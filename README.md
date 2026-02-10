@@ -5,7 +5,7 @@ AI-powered medical assistant for skin lesion analysis and symptom checking.
 ## Features
 
 - 🔬 **Skin Lesion Analysis**: Upload images of skin lesions for AI-powered classification
-- 🩺 **Symptom Checker**: Analyze symptoms using GPT-4o-mini for preliminary medical assessment
+- 🩺 **Symptom Checker**: Analyze symptoms using DeepSeek AI for preliminary medical assessment
 - 📊 **Standardized API Responses**: Consistent response format across all endpoints
 - 🏗️ **Clean Architecture**: Service layer pattern with separation of concerns
 
@@ -13,7 +13,7 @@ AI-powered medical assistant for skin lesion analysis and symptom checking.
 
 - **FastAPI**: Modern web framework for building APIs
 - **ONNX Runtime**: High-performance inference for skin lesion classification
-- **OpenAI GPT-4o-mini**: Advanced symptom analysis
+- **DeepSeek AI**: Advanced symptom analysis (compatible with OpenAI API)
 - **Pydantic**: Data validation using Python type annotations
 - **Python 3.12**: Latest Python features
 
@@ -78,8 +78,10 @@ doctor_mate_ai/
    
    Create a `.env` file in the root directory:
    ```
-   OPENAI_API_KEY=your_openai_api_key_here
+   DEEPSEEK_API_KEY=your_deepseek_api_key_here
    ```
+   
+   Get your DeepSeek API key from: https://platform.deepseek.com/
 
 ## Running the Application
 

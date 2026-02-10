@@ -1,9 +1,9 @@
 """
-Service layer for symptom analysis using OpenAI.
+Service layer for symptom analysis using Gemini API.
 """
 import os
 import json
-from openai import AsyncOpenAI
+from google import genai
 from typing import Dict
 from app.services.doctormate_api_service import (
     get_doctormate_api_service,
@@ -12,7 +12,7 @@ from app.services.doctormate_api_service import (
 
 
 class SymptomsAnalysisService:
-    """Service for analyzing symptoms using OpenAI API."""
+    """Service for analyzing symptoms using Gemini API."""
     
     # System prompt for medical assessment
     SYSTEM_PROMPT = """You are a medical symptom checker assistant. 
@@ -33,13 +33,14 @@ Base your analysis on common medical knowledge. Be cautious and recommend profes
     
     def __init__(self):
         """Initialize the service."""
-        self.api_key = os.getenv("OPENAI_API_KEY")
+        self.api_key = os.getenv("GEMINI_API_KEY")
         if not self.api_key:
-            raise ValueError("OPENAI_API_KEY environment variable is not set.")
+            raise ValueError("GEMINI_API_KEY environment variable is not set.")
+        self.client = genai.Client(api_key=self.api_key)
     
     async def analyze_symptoms(self, symptoms: str, token: str = None) -> Dict:
         """
-        Analyze symptoms using OpenAI API.
+        Analyze symptoms using Gemini API.
         
         Args:
             symptoms: User's symptom description
@@ -49,22 +50,18 @@ Base your analysis on common medical knowledge. Be cautious and recommend profes
             dict: Structured medical assessment
             
         Raises:
-            Exception: If OpenAI API call fails
+            Exception: If Gemini API call fails
         """
-        client = AsyncOpenAI(api_key=self.api_key)
-        
         try:
-            response = await client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=[
-                    {"role": "system", "content": self.SYSTEM_PROMPT},
-                    {"role": "user", "content": f"User symptoms: {symptoms}"}
-                ],
-                temperature=0.3,
-                response_format={"type": "json_object"}
+            prompt = f"{self.SYSTEM_PROMPT}\n\nUser symptoms: {symptoms}"
+            
+            response = await self.client.aio.models.generate_content(
+                model='gemini-2.5-flash',
+                contents=prompt,
+                config={'response_mime_type': 'application/json', 'temperature': 0.3}
             )
             
-            result = json.loads(response.choices[0].message.content)
+            result = json.loads(response.text)
             
             # Get specialty and doctors from DoctorMate API if token provided
             specialty = {}
@@ -88,7 +85,7 @@ Base your analysis on common medical knowledge. Be cautious and recommend profes
             return result
             
         except Exception as e:
-            raise Exception(f"OpenAI API error: {str(e)}")
+            raise Exception(f"Gemini API error: {str(e)}")
 
 
 # Singleton instance
