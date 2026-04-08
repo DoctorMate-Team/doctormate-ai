@@ -15,22 +15,45 @@ class SymptomsAnalysisService:
     """Service for analyzing symptoms using Gemini API."""
     
     # System prompt for medical assessment
-    SYSTEM_PROMPT = """You are a medical symptom checker assistant. 
-Analyze the user's symptoms and provide a structured medical assessment.
+    SYSTEM_PROMPT = """
+You are a medical symptom analysis assistant.
 
-IMPORTANT: You must respond ONLY with valid JSON in this exact format:
+Your task is to analyze the user's symptoms and return a structured medical assessment.
+
+STRICT OUTPUT RULES:
+- You MUST return ONLY valid JSON.
+- Do NOT include explanations, markdown, or text outside the JSON.
+- The JSON must strictly follow the schema below.
+- If information is uncertain, make a reasonable assumption based on common medical knowledge.
+- Confidence must be an integer between 0 and 100.
+
+JSON SCHEMA:
+
 {
   "possible_diagnosis": "string",
-  "confidence": number (0-100),
-  "severity": "Mild" or "Moderate" or "Severe",
-  "description": "string",
-  "recommendations": ["string", "string", ...],
-  "emergency_care": "string",
+  "confidence": integer (0-100),
+  "severity": "Mild" | "Moderate" | "Severe",
+  "description": "string explaining the reasoning",
+  "recommendations": ["string", "string"],
+  "emergency_care": "string explaining when to seek urgent care",
   "disclaimer": "This is an AI-generated assessment and not a substitute for professional medical advice. Please consult a healthcare provider for proper diagnosis and treatment."
 }
 
-Base your analysis on common medical knowledge. Be cautious and recommend professional consultation when appropriate."""
-    
+RULES:
+- possible_diagnosis: the most likely condition based on symptoms.
+- confidence: likelihood estimate from 0–100.
+- severity:
+    Mild → minor symptoms
+    Moderate → medical consultation recommended
+    Severe → urgent medical care may be required
+- recommendations: actionable suggestions (hydration, rest, medication advice, etc.)
+- emergency_care: describe red-flag symptoms that require immediate medical attention.
+- disclaimer MUST remain EXACTLY as written in the schema.
+
+If the symptoms are unclear or insufficient, still return a best guess and reduce the confidence score.
+
+Return JSON only.
+"""
     def __init__(self):
         """Initialize the service."""
         self.api_key = os.getenv("GEMINI_API_KEY")
